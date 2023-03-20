@@ -6,13 +6,13 @@ Aura is an application that assists with finding music of similar "Auras". It al
 
 ```javascript
 console.log("Hello world!")
-This is where the React and Git commands will go to pull the application.
+This is where the any initialization commands will go to pull the application.
 ```
 
 ## Usage
 
 ```
-This is where the terminal commands will go to start the web server.
+This is where the terminal commands will go to test the application. 
 ```
 
 ## Contributing
