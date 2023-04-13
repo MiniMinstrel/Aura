@@ -11,8 +11,7 @@ async function selectFiveArtists(req, res) {
       password: password,
       connectString: "oracle.cise.ufl.edu/orcl"
     });
-
-    console.log('connected to database');
+    
     // run query to get all employees
     result = await connection.execute(
     	`SELECT ARTIST_NAME 
@@ -29,7 +28,6 @@ async function selectFiveArtists(req, res) {
       try {
         // Always close connections
         await connection.close();
-        console.log('close connection success');
       } catch (err) {
         console.error(err.message);
       }
