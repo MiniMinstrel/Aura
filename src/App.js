@@ -5,7 +5,7 @@ import "./App.css";
   
 function App() {
 
-  const [currentData, setCurrentData] = useState();
+  const [currentData, setCurrentData] = useState(["default.jpg"]);
 
   useEffect(() => {
     axios.get('/artists')
