@@ -2,7 +2,8 @@ const express = require('express')
 const oracledb = require('oracledb');
 const app = express();
 const port = 8000;
-var password = "py3efCwxfT8DBjogR4mYxQ6k";
+require("dotenv").config();
+var password = process.env.PASSWORD;
 
 async function selectFiveArtists(req, res) {
   try {
