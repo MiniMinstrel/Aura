@@ -24,10 +24,52 @@
   color: white;
 }
 
+.Aura-Header{
+  background-color: skyblue;
+  font-size: calc(10px + 2vmin);
+  min-height: 10vh;
+  display: flex;
+  align-items: center;
+}
+
+.app-header-words{
+  margin-left: 1vw;
+
+}
+
 .App-link {
   color: #61dafb;
 }
 
+.about{
+  margin-left: 10vw;
+  margin-top: 10vh;
+}
+
+.about h1{
+  font-size: 10vmin;
+}
+.about p{
+  margin-left: 3.5vw;
+  margin-right: 10vw;
+  margin-top: 10vh;
+  font-family: 'Roboto Slab', serif;
+  font-size: calc(10px + 2vmin);
+}
+
+
+.AuraImage{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 68vh;
+}
+.AuraImage img{
+  max-width: 100%;
+  max-height: 100%;
+  width: 1000px;
+  object-fit: contain;
+}
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
