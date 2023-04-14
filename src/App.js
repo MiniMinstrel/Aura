@@ -1,4 +1,3 @@
-import logo from "./logo.svg";
 import { useState, useEffect } from 'react'; 
 import axios from 'axios';
 import "./App.css";
@@ -6,6 +5,8 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from "./Home";
 import Login from "./Login";
 import Avgstreams from "./avgstreams";
+import TestQuery from "./TestQuery";
+import Queries from "./Queries";
 
   
 function App() {
@@ -59,6 +60,8 @@ function App() {
         <Route path="/" element={<Home/>} />
         <Route path="/Avgstreams" element={<Avgstreams/>} /> 
         <Route path="/Login" element={<Login/>} /> 
+        <Route path="/TestQuery" element = {<TestQuery/>} />
+        <Route path="/Queries" element = {<Queries/>} />
         {/* <Route path="*" element={<NotFound/>} /> */}
       </Routes>
 

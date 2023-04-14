@@ -70,6 +70,41 @@
   width: 1000px;
   object-fit: contain;
 }
+
+.two-column{
+  display: flex;
+  flex-direction: row;
+}
+.left{
+  flex:1;
+}
+.right{
+  flex:1;
+  justify-content: left;
+  align-items: left;
+  text-align: left;
+}
+
+.two-column button{
+  background-color: #61dafb;
+  color: black;
+  font-size: calc(10px + 2vmin);
+  width: calc(25px + 40vmin);
+  height: calc(15px + 25vh);
+  border-radius: calc(4px + 2vmin);
+  border: calc(2px + 0.5vmin) solid black
+}
+
+.two-column button:hover{
+  background-color: #378297;
+  cursor: pointer;
+}
+
+.query-descriptions{
+  
+}
+
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
