@@ -1,18 +1,22 @@
 import { Link } from 'react-router-dom';
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { useEffect } from 'react';
 import AuraImage from './Aura.png'
 
 const Home = () => {
 
-    // const history = useHistory();
-    // const Queries = () => {
-    //   history.push("/TestQuery")
-    // }
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    // Scroll to the top of the page whenever the component is mounted or updated
+    window.scrollTo(0, 0);
+  }, [navigate]); // Scroll to the top of the page only when navigating to a new page
+
 
     return (
       <div>
         <div className='AuraImage'>
-          <img src={AuraImage} alt="logo"></img>
+          <img src={AuraImage} alt="Aura Image and Credits"></img>
         </div>
         <div className='about'>
           <h1>About Aura</h1>

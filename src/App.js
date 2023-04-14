@@ -1,9 +1,12 @@
 import { useState, useEffect } from 'react'; 
 import axios from 'axios';
 import "./App.css";
+import AuraLogo from './Aura-logo.png'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from "./Home";
 import Login from "./Login";
+import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Avgstreams from "./avgstreams";
 import TestQuery from "./TestQuery";
 import Queries from "./Queries";
@@ -17,8 +20,10 @@ import PopularElements from './PopularElements';
 function App() {
 
   const [currentData, setCurrentData] = useState(["default.jpg"]);
-
+  const navigate = useNavigate();
   useEffect(() => {
+    window.scrollTo(0,0);
+
     axios.get('/artists')
     .then(response => {
       const data = response.data;
@@ -27,11 +32,12 @@ function App() {
     .catch(error => {
       console.error(error);
     })
-  })
+  }, [navigate]);
 
   return (
 
-    <Router>
+    // <Router>
+      <div>
       
     {/* <div className="App">
       <header className="App-header">
@@ -56,8 +62,15 @@ function App() {
         </header> 
         </div>*/}
         <div className="Aura-Header">
-          <div className="app-header-words">
+          <div className="app-header-words Aura-Header-left">
            <p>Welcome to Aura</p> 
+          </div>
+          <div className='Aura-Header-right'>
+            <Link to="/">
+            <button>
+              <img src={AuraLogo} alt="logo"></img>
+            </button>
+            </Link>
           </div>
         </div>
 
@@ -76,8 +89,8 @@ function App() {
         </Route>
         {/* <Route path="*" element={<NotFound/>} /> */}
       </Routes>
-
-    </Router>
+      </div>
+    // </Router>
   );
 }
 

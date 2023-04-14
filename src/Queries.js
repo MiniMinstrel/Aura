@@ -1,6 +1,17 @@
 import { Link } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
+import { useEffect } from 'react';
 
 const Queries = () => {
+
+  // const navigate = useNavigate();
+
+  // useEffect(() => {
+  //   // Scroll to the top of the page whenever the component is mounted or updated
+  //   window.scrollTo(0, 0);
+  // }, [navigate]); // Scroll to the top of the page only when navigating to a new page
+
+
     return (
       <div>
         <div className='about'>
