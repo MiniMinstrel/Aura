@@ -4,19 +4,86 @@ const Queries = () => {
     return (
       <div>
         <div className='about'>
-          <h1>Queries</h1>
+          <h1>Feeling <i>Querious?</i></h1>
           <p>
             Here, you can decide from a few options for the
             type of information that you can look into.  Give
             each page a brief scan to see what's available,
             and then, have fun!
           </p>
+          <br></br>
+          <br></br>
+          <br></br>
+          <br></br>
         </div>
         <div className='query-descriptions'>
-          
+          <Link to="StreamsOverTime">
+            <button className='query-descriptions-left'>
+              Streams Over Time
+            </button>
+          </Link>
+
+          <p className='query-descriptions-right'>
+            Ever wanted to see when a song went viral?
+            Here, you can select a song and see how many streams
+            it's had over time.
+          </p>
         </div>
 
-        hey
+        <div className='query-descriptions'>
+          <Link to="RegionsRadio">
+            <button className='query-descriptions-left' style={{backgroundColor: "#DFFFFF"}}>
+              Region's Radio
+            </button>
+          </Link>
+
+          <p className='query-descriptions-right'>
+            What do they listen to over there?  Find out here!
+          </p>
+        </div>
+
+        <div className='query-descriptions'>
+          <Link to="SoundOfTime">
+            <button className='query-descriptions-left' style={{backgroundColor: "#DAC0B9"}}>
+              Sound of Time
+            </button>
+          </Link>
+
+          <p className='query-descriptions-right'>
+            The popularity of popular music!  See the time periods where music
+            was (or wasn't) being released.
+          </p>
+        </div>
+
+        <div className='query-descriptions'>
+          <Link to="StylisticChanges">
+            <button className='query-descriptions-left' style={{backgroundColor: "#EC896E"}}>
+              Stylistic Changes
+            </button>
+          </Link>
+
+          <p className='query-descriptions-right'>
+            What would music be if it all sounded the same?  See how your favorite
+            artists changed their signarutre sounds over time.
+          </p>
+        </div>
+
+        <div className='query-descriptions'>
+          <Link to="PopularElements">
+            <button className='query-descriptions-left' style={{backgroundColor: "#FF673F"}}>
+              Popular Elements
+            </button>
+          </Link>
+
+          <p className='query-descriptions-right'>
+            Here at Aura, we have 15 descriptors for the sounds of music.  Come 
+            see which of these are the most popular!
+          </p>
+        </div>
+
+
+        
+
        </div>
 
     );

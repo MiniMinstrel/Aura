@@ -7,6 +7,11 @@ import Login from "./Login";
 import Avgstreams from "./avgstreams";
 import TestQuery from "./TestQuery";
 import Queries from "./Queries";
+import SoundOfTime from './SoundOfTime';
+import StylisticChanges from './StylisticChanges';
+import RegionsRadio from './RegionsRadio';
+import StreamsOverTime from './StreamsOverTime';
+import PopularElements from './PopularElements';
 
   
 function App() {
@@ -61,7 +66,14 @@ function App() {
         <Route path="/Avgstreams" element={<Avgstreams/>} /> 
         <Route path="/Login" element={<Login/>} /> 
         <Route path="/TestQuery" element = {<TestQuery/>} />
-        <Route path="/Queries" element = {<Queries/>} />
+        <Route path="/Queries">
+          <Route index element = {<Queries/>} />
+          <Route path="StreamsOverTime" element = {<StreamsOverTime/>} />
+          <Route path="RegionsRadio" element = {<RegionsRadio/>} />
+          <Route path="SoundOfTime" element = {<SoundOfTime/>} />
+          <Route path="StylisticChanges" element = {<StylisticChanges/>} />
+          <Route path="PopularElements" element = {<PopularElements/>} />
+        </Route>
         {/* <Route path="*" element={<NotFound/>} /> */}
       </Routes>
 

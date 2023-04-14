@@ -101,9 +101,47 @@
 }
 
 .query-descriptions{
-  
+  display: flex;
+  flex-direction: row;
+  margin-right: 1.5vw;
+  margin-left: 1.5vw;
+  margin-top: 2vh;
 }
 
+.query-descriptions h1{
+  font-size: calc(25px + 2vmin);
+}
+
+.query-descriptions p{
+  margin-left: 3.5vw;
+  margin-right: 10vw;
+  font-family: 'Roboto Slab', serif;
+  font-size: calc(10px + 3vmin);
+}
+
+.query-descriptions button{
+  background-color: #acf9ff;
+  color: black;
+  font-size: calc(10px + 2vmin);
+  width: calc(25px + 30vmin);
+  height: calc(15px + 20vh);
+  border-radius: calc(4px + 2vmin);
+  border: calc(2px + 0.5vmin) solid black
+}
+.query-descriptions button:hover{
+  background-color: #74c4c4;
+  cursor: pointer;
+}
+
+.query-descriptions-left{
+  flex:0.5;
+}
+.query-descriptions-right{
+  flex:1;
+  justify-content: left;
+  align-items: left;
+  text-align: left;
+}
 
 @keyframes App-logo-spin {
   from {
