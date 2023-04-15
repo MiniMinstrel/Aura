@@ -39,7 +39,7 @@
 
 const fs = require('fs');
 const oracledb = require('oracledb');
-const dbConfig = require('./dbconfig.js');
+require("dotenv").config();
 
 // On Windows and macOS, you can specify the directory containing the Oracle
 // Client Libraries at runtime, or before Node.js starts.  On other platforms
@@ -47,6 +47,7 @@ const dbConfig = require('./dbconfig.js');
 // See the node-oracledb installation documentation.
 // If the search path is not correct, you will get a DPI-1047 error.
 let libPath;
+/*
 if (process.platform === 'win32') {           // Windows
   libPath = 'C:\API\instantclient_21_9';
 } else if (process.platform === 'darwin') {   // macOS
@@ -54,6 +55,7 @@ if (process.platform === 'win32') {           // Windows
 } else {
   libPath = 'C:\API\instantclient_21_9';
 }
+*/
 if (libPath && fs.existsSync(libPath)) {
   oracledb.initOracleClient({ libDir: libPath });
 }
@@ -64,7 +66,11 @@ async function run() {
 
   try {
     // Get a non-pooled connection
-    connection = await oracledb.getConnection(dbConfig);
+    connection = await oracledb.getConnection({
+      user: "jscharff",
+      password: process.env.PASSWORD,
+      connectString: "oracle.cise.ufl.edu/orcl"
+    });
 
     console.log('Connection was successful!');
 
