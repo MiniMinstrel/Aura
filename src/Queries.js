@@ -17,16 +17,21 @@ const Queries = () => {
         <div className='about'>
           <h1>Feeling <i>Querious?</i></h1>
           <p>
-            Here, you can decide from a few options for the
-            type of information that you can look into.  Give
+            Here, you can decide the
+            type of information that you look into.  Give
             each page a brief scan to see what's available,
             and then, have fun!
           </p>
           <br></br>
           <br></br>
+          </div>
+          <div className='divider'>
+            <br></br>
+          </div>
           <br></br>
           <br></br>
-        </div>
+          <br></br>
+          <br></br>
         <div className='query-descriptions'>
           <Link to="StreamsOverTime">
             <button className='query-descriptions-left'>

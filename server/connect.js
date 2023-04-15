@@ -39,7 +39,9 @@
 
 const fs = require('fs');
 const oracledb = require('oracledb');
-const dbConfig = require('./dbconfig.js');
+require("dotenv").config();
+var password = process.env.PASSWORD;
+//const dbConfig = require('./dbconfig.js');
 
 // On Windows and macOS, you can specify the directory containing the Oracle
 // Client Libraries at runtime, or before Node.js starts.  On other platforms
@@ -64,7 +66,11 @@ async function run() {
 
   try {
     // Get a non-pooled connection
-    connection = await oracledb.getConnection(dbConfig);
+    connection = await oracledb.getConnection({
+      user: "jscharff",
+      password: password,
+      connectString: "oracle.cise.ufl.edu/orcl"
+    });
 
     console.log('Connection was successful!');
 

@@ -5,18 +5,21 @@ import AuraImage from './Aura.png'
 
 const Home = () => {
 
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
-  useEffect(() => {
-    // Scroll to the top of the page whenever the component is mounted or updated
-    window.scrollTo(0, 0);
-  }, [navigate]); // Scroll to the top of the page only when navigating to a new page
+  // useEffect(() => {
+  //   // Scroll to the top of the page whenever the component is mounted or updated
+  //   window.scrollTo(0, 0);
+  // }, [navigate]); // Scroll to the top of the page only when navigating to a new page
 
 
     return (
       <div>
         <div className='AuraImage'>
           <img src={AuraImage} alt="Aura Image and Credits"></img>
+        </div>
+        <div className='divider'>
+          <br></br>
         </div>
         <div className='about'>
           <h1>About Aura</h1>
@@ -38,6 +41,28 @@ const Home = () => {
             </button>
             </Link>
           </div>
+        </div>
+        <br></br>
+        <br></br>
+        <div className='divider'>
+        </div>
+        <br></br>
+        <div className='tuples'>
+          <div className='tuples-left'>
+            <button>Tuple Button!</button>
+          </div>
+          <div className='tuples-right'>
+            <p>
+              This is a magical button that will tell you Aura's darkest secret...<br>
+              </br>
+              <br></br>
+              The number of tuples in our dataset!
+            </p>
+          </div>
+        </div>
+        <br></br>
+        <div className='divider'>
+          <br></br>
         </div>
         <ul>
           <li>

@@ -19,19 +19,9 @@ import PopularElements from './PopularElements';
   
 function App() {
 
-  const [currentData, setCurrentData] = useState(["default.jpg"]);
   const navigate = useNavigate();
   useEffect(() => {
     window.scrollTo(0,0);
-
-    axios.get('/artists')
-    .then(response => {
-      const data = response.data;
-      setCurrentData(data);
-    })
-    .catch(error => {
-      console.error(error);
-    })
   }, [navigate]);
 
   return (
