@@ -5,17 +5,17 @@ import axios from 'axios';
 const TestQuery = () => {
 
     const [currentData, setCurrentData] = useState(["default.jpg"]);
+    const [params, setParams] = useState('');
   
-    useEffect(() => {
-      axios.get('/artists')
-      .then(response => {
-        const data = response.data;
-        setCurrentData(data);
-      })
-      .catch(error => {
-        console.error(error);
-      })
-    })
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        axios.post('/testQuery?genre=' + params, { params })
+            .then(response => {
+                console.log(response.data);
+                setCurrentData(response.data);
+            })
+            .catch(error => console.error(error));
+    }
 
     return(
 
@@ -27,15 +27,17 @@ const TestQuery = () => {
                 </p>
                 <br/>
                 <p>
-                    Here we should get 5 artists:
+                    Here's a sample form that allows you to search for the top five artists that have music in X genre of choice.:
                 </p>
 
+                <form onSubmit={handleSubmit}>
+                    <input type="text" value={ params } onChange={(e) => setParams(e.target.value)} />
+                    <button type="submit">Submit</button>
+                </form>
             </div>
-
-            {currentData.map(k => (
-            <p>{k}</p>
-              ))}
-
+            {currentData.map((k, index) => (
+        <p>{index+1}. {k[0]}: <b>{k[1]}</b></p>
+          ))}
         </div>
 
         
