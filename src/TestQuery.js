@@ -4,7 +4,7 @@ import axios from 'axios';
 
 const TestQuery = () => {
 
-    const [currentData, setCurrentData] = useState(["default.jpg"]);
+    const [currentData, setCurrentData] = useState(["XX"]);
     const [params, setParams] = useState('');
   
     const handleSubmit = (event) => {
