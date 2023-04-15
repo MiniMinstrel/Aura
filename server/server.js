@@ -106,9 +106,9 @@ async function selectArtistByGenre(req, res, param) {
     result = await connection.execute(
       `SELECT ARTIST_NAME, POPULARITY
        FROM ARTIST
-       WHERE CONTAINS(GENRES, '%${param}%') > 0
+       WHERE CONTAINS(GENRES, :param) > 0
        ORDER BY POPULARITY DESC
-       FETCH FIRST 5 ROWS ONLY`);
+       FETCH FIRST 5 ROWS ONLY`, {param: param});
 
     if (result.rows.length == 0) {
       //query return zero employees
