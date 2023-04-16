@@ -26,7 +26,13 @@ const StreamsOverTime = () => {
             Streams Over Time
           </h1>
           <p1>
-            [paragraph about query]
+            &emsp; It's pretty easy to access how many streams a song has through
+            your favorite music service.  But remembering each month's numbers?
+            Well... a bit harder. But don't worry! Aura takes care of that for you!
+            <br></br>
+            <br></br>
+            &emsp; Name a song and time frame and we'll show you how many streams that song
+            has had over your time.  
           </p1>
         </div>
         <br></br>
@@ -49,12 +55,42 @@ const StreamsOverTime = () => {
           </div>
           <div className='query-page-right'>
             <h1>Input</h1>
-            <form onSubmit={handleSubmit}>
-                    <input type="text" value={ song } onChange={(e) => setSong(e.target.value)} />
-                    <input type="date" value={ timeA } onChange={(e) => setTimeA(e.target.value)} />
-                    <input type="date" value={ timeB } onChange={(e) => setTimeB(e.target.value)} />
-                    <button type="submit">Submit</button>
-            </form>
+            
+            <div className='input-area'>
+              <div className='input-area-split'>
+                <form>
+                  <input type="date" value={ timeA } onChange={(e) => setTimeA(e.target.value)} />
+                </form>
+                <p>
+                    Start Date
+                </p>
+              </div>
+              <div className='input-area-split'>
+                <form>
+                  <input type="date" value={ timeB } onChange={(e) => setTimeB(e.target.value)} />
+                </form>
+                <p>
+                  End Date
+                </p>
+              </div>
+              <div className='input-area-split'>
+                <form>
+                  <input type="text" value={ song } onChange={(e) => setSong(e.target.value)} />
+                </form>
+                <p></p>
+              </div>
+              <div className='input-area-split'>
+                <form onSubmit={handleSubmit}>    
+                  <button type="submit">Submit</button>
+                </form>
+              </div>
+
+              
+              
+              
+            </div>
+
+
           </div>
 
         </div>
