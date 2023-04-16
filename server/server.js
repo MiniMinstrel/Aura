@@ -93,6 +93,54 @@ app.get('/artist', function (req, res) {
   selectArtistByID(req, res, id);
 })
 
+async function selectArtistByGenre(req, res, param) {
+  try {
+    connection = await oracledb.getConnection({
+      user: "jscharff",
+      password: password,
+      connectString: "oracle.cise.ufl.edu/orcl"
+    });
+
+    console.log(param);
+    // run query to get employee with employee_id
+    result = await connection.execute(
+      `SELECT ARTIST_NAME, POPULARITY
+       FROM ARTIST
+       WHERE CONTAINS(GENRES, :param) > 0
+       ORDER BY POPULARITY DESC
+       FETCH FIRST 5 ROWS ONLY`, {param: param});
+
+    if (result.rows.length == 0) {
+      //query return zero employees
+      return res.send('query send no rows');
+    } else {
+      //send all employees
+      return res.json(result.rows);
+    }
+
+  } catch (err) {
+    //send error message
+    return res.send(err.message);
+  } finally {
+    if (connection) {
+      try {
+        // Always close connections
+        await connection.close(); 
+      } catch (err) {
+        return console.error(err.message);
+      }
+    }
+  }
+}
+
+//get /employee?id=<id employee>
+app.post('/testQuery', function (req, res) {
+  //get query param ?id
+  let param = req.query.genre;
+  // id param if it is number
+  selectArtistByGenre(req, res, param);
+})
+
 app.post("/post", (req, res) => {
   console.log("Connected to React");
   res.redirect("/");
