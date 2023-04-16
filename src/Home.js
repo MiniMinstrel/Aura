@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
 import { useEffect } from 'react';
 import AuraImage from './Aura.png'
+import axios from 'axios';
 
 const Home = () => {
 
@@ -11,6 +12,15 @@ const Home = () => {
   //   // Scroll to the top of the page whenever the component is mounted or updated
   //   window.scrollTo(0, 0);
   // }, [navigate]); // Scroll to the top of the page only when navigating to a new page
+
+  const tupleReturn = (event) => {
+        event.preventDefault();
+        axios.post('/alltuples')
+            .then(response => {
+                alert("The database contains " + response.data + " tuples!");
+            })
+            .catch(error => console.error(error));
+    }
 
 
     return (
@@ -47,7 +57,7 @@ const Home = () => {
         <div className='divider'>
         </div>
         <br></br>
-        <div className='tuples'>
+        <div className='tuples' onClick={ tupleReturn }>
           <div className='tuples-left'>
             <button>Tuple Button!</button>
           </div>

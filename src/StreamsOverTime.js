@@ -1,6 +1,24 @@
 import { Link } from 'react-router-dom';
+import { useState, useEffect } from 'react'; 
+import axios from 'axios';
 
 const StreamsOverTime = () => {
+
+    const [song, setSong] = useState('Song Title');
+    const [timeA, setTimeA] = useState('');
+    const [timeB, setTimeB] = useState('');
+    const [currentData, setCurrentData] = useState(["XX"]);
+  
+    const handleSubmit = (event) => {
+      event.preventDefault();
+      axios.post('/STOT', { song: song, timeA: timeA, timeB: timeB})
+            .then(response => {
+                console.log(response.data);
+                setCurrentData(response.data);
+            })
+            .catch(error => console.error(error));
+    }
+
     return (
       <div>
         <div className='query-page-about'>
@@ -31,6 +49,12 @@ const StreamsOverTime = () => {
           </div>
           <div className='query-page-right'>
             <h1>Input</h1>
+            <form onSubmit={handleSubmit}>
+                    <input type="text" value={ song } onChange={(e) => setSong(e.target.value)} />
+                    <input type="date" value={ timeA } onChange={(e) => setTimeA(e.target.value)} />
+                    <input type="date" value={ timeB } onChange={(e) => setTimeB(e.target.value)} />
+                    <button type="submit">Submit</button>
+            </form>
           </div>
 
         </div>
