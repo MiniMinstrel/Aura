@@ -239,6 +239,67 @@ app.post('/STOT', function (req, res) {
   STOT(req, res, song, date1, date2);
 })
 
+async function RR(req, res, chart, region, genre, date1, date2) {
+  try {
+    connection = await oracledb.getConnection({
+      user: "jscharff",
+      password: password,
+      connectString: "oracle.cise.ufl.edu/orcl"
+    });
+
+    // run query to get employee with employee_id
+    console.log("Testing query!");
+    result = await connection.execute(
+      `SELECT TO_CHAR(chartdate, 'YYYY-MM'), genres
+       FROM
+          (SELECT * FROM jscharff.chart WHERE
+            chart.name = :chart
+            AND chart.region = :region
+            AND chart.chartdate BETWEEN
+            TO_DATE(:date1,'YYYY-MM-DD')
+            AND TO_DATE(:date2,'YYYY-MM-DD')),
+          jscharff.contains,
+          jscharff.made_by,
+            (SELECT artist.artist_id, artist.genres FROM jscharff.artist
+             WHERE CONTAINS(ARTIST.GENRES, :genre) > 0)
+      ORDER BY TO_CHAR(chartdate, 'YYYY-MM') DESC`, 
+      {chart: chart, region: region, genre: genre, date1: date1, date2: date2});
+    console.log("Completed query!");
+
+    if (result.rows.length == 0) {
+      //query return zero employees
+      return res.send('query send no rows');
+    } else {
+      //send all employees
+      return res.json(result.rows);
+    }
+
+  } catch (err) {
+    //send error message
+    return res.send(err.message);
+  } finally {
+    if (connection) {
+      try {
+        // Always close connections
+        await connection.close(); 
+      } catch (err) {
+        return console.error(err.message);
+      }
+    }
+  }
+}
+
+app.post('/RR', function (req, res) {
+  console.log(req.body);
+  const chart = req.body.chart;
+  const region = req.body.region;
+  const genre = req.body.genre;
+  const date1 = req.body.timeA;
+  const date2 = req.body.timeB;
+  //const artist = req.body.artist;
+  RR(req, res, chart, region, genre, date1, date2);
+})
+
 app.post("/post", (req, res) => {
   console.log("Connected to React");
   res.redirect("/");

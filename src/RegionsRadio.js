@@ -1,6 +1,26 @@
 import { Link } from 'react-router-dom';
+import { useState, useEffect } from 'react'; 
+import axios from 'axios';
 
 const RegionsRadio = () => {
+
+  const [chart, setChart] = useState('top200');
+  const [region, setRegion] = useState('Region Name');
+  const [genre, setGenre] = useState('Genre Name');
+  const [timeA, setTimeA] = useState('');
+  const [timeB, setTimeB] = useState('');
+  const [currentData, setCurrentData] = useState(["XX"]);
+
+  const handleSubmit = (event) => {
+      event.preventDefault();
+      axios.post('/RR', { chart: chart, region: region, genre: genre, timeA: timeA, timeB: timeB })
+            .then(response => {
+                console.log(response.data);
+                setCurrentData(response.data);
+            })
+            .catch(error => console.error(error));
+    }
+
   return (
     <div>
       <div className='query-page-about'>
@@ -30,6 +50,50 @@ const RegionsRadio = () => {
         </div>
         <div className='query-page-right'>
           <h1>Input</h1>
+          <div className='input-area'>
+              <div className='input-area-split'>
+                <form>
+                  <input type="date" value={ timeA } onChange={(e) => setTimeA(e.target.value)} />
+                </form>
+                <p>
+                    Start Date
+                </p>
+              </div>
+              <div className='input-area-split'>
+                <form>
+                  <input type="date" value={ timeB } onChange={(e) => setTimeB(e.target.value)} />
+                </form>
+                <p>
+                  End Date
+                </p>
+              </div>
+              <div className='input-area-split'>
+                <form>
+                  <select value={ chart } onChange={(e) => setChart(e.target.value)}>
+                    <option value="top200">top200</option>
+                    <option value="viral50">viral50</option>
+                  </select>
+                </form>
+                <p>Chart Type</p>
+              </div>
+              <div className='input-area-split'>
+                <form>
+                  <input type="text" value={ region } onChange={(e) => setRegion(e.target.value)} />
+                </form>
+                <p></p>
+              </div>
+              <div className='input-area-split'>
+                <form>
+                  <input type="text" value={ genre } onChange={(e) => setGenre(e.target.value)} />
+                </form>
+                <p></p>
+              </div>
+              <div className='input-area-split'>
+                <form onSubmit={handleSubmit}>    
+                  <button type="submit">Submit</button>
+                </form>
+              </div>
+              </div>
         </div>
 
       </div>
