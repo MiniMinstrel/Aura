@@ -6,7 +6,7 @@ const RegionsRadio = () => {
 
   const [chart, setChart] = useState('top200');
   const [region, setRegion] = useState('Region Name');
-  const [genre, setGenre] = useState('Genre Name');
+  const [genre, setGenre] = useState('Genre');
   const [timeA, setTimeA] = useState('');
   const [timeB, setTimeB] = useState('');
   const [currentData, setCurrentData] = useState(["XX"]);
@@ -53,6 +53,33 @@ const RegionsRadio = () => {
         <div className='query-page-right'>
           <h1>Input</h1>
           <div className='input-area'>
+          <div className='input-area-split'>
+                <form>
+                  <input type="text" value={ genre } onChange={(e) => setGenre(e.target.value)} />
+                </form>
+                <p></p>
+              </div>
+          <div className='input-area-split'>
+                <form>
+                  <select value={ chart } onChange={(e) => setChart(e.target.value)}>
+                    <option value="top200">Top 200</option>
+                    <option value="viral50">Viral 50</option>
+                  </select>
+                </form>
+                <p>Chart Type</p>
+              </div>
+              <div className='input-area-split'>
+                <form>
+                  <select value={ region } onChange={(e) => setRegion(e.target.value)}>
+                    <option value="top200">Top 200</option>
+                    <option value="top200">Top 200</option>
+                    <option value="viral50">Viral 50</option>
+                  </select>
+                </form>
+                <p>Region</p>
+              </div>
+              
+              
               <div className='input-area-split'>
                 <form>
                   <input type="date" value={ timeA } onChange={(e) => setTimeA(e.target.value)} />
@@ -70,31 +97,11 @@ const RegionsRadio = () => {
                 </p>
               </div>
               <div className='input-area-split'>
-                <form>
-                  <select value={ chart } onChange={(e) => setChart(e.target.value)}>
-                    <option value="top200">top200</option>
-                    <option value="viral50">viral50</option>
-                  </select>
-                </form>
-                <p>Chart Type</p>
-              </div>
-              <div className='input-area-split'>
-                <form>
-                  <input type="text" value={ region } onChange={(e) => setRegion(e.target.value)} />
-                </form>
-                <p></p>
-              </div>
-              <div className='input-area-split'>
-                <form>
-                  <input type="text" value={ genre } onChange={(e) => setGenre(e.target.value)} />
-                </form>
-                <p></p>
-              </div>
-              <div className='input-area-split'>
                 <form onSubmit={handleSubmit}>    
                   <button type="submit">Submit</button>
                 </form>
               </div>
+              
               </div>
         </div>
 
