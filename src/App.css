@@ -212,7 +212,7 @@
 .input-area-split{
   display: flex;
   flex-direction: row;
-  justify-content: space-evenly;
+  justify-content: space-around;
   align-items: center;
   margin-bottom: 2vh;
   margin-top: 2vh;
@@ -246,6 +246,15 @@
 .input-area-split button:hover{
   cursor: pointer;
   background-color: rgb(109, 150, 118);
+}
+.input-area-split select{
+  padding: .5rem .8rem .5rem .8rem;
+  margin: .9vw 0 ;
+  border-block-start-width: 5px;
+  border-radius: 5px;
+  font-size: 20px;
+  margin-left: 2vw;
+  margin-right: 1vw;
 }
 
 

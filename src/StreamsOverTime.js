@@ -59,6 +59,12 @@ const StreamsOverTime = () => {
             <div className='input-area'>
               <div className='input-area-split'>
                 <form>
+                  <input type="text" value={ song } onChange={(e) => setSong(e.target.value)} />
+                </form>
+                <p></p>
+              </div>
+              <div className='input-area-split'>
+                <form>
                   <input type="date" value={ timeA } onChange={(e) => setTimeA(e.target.value)} />
                 </form>
                 <p>
@@ -73,12 +79,7 @@ const StreamsOverTime = () => {
                   End Date
                 </p>
               </div>
-              <div className='input-area-split'>
-                <form>
-                  <input type="text" value={ song } onChange={(e) => setSong(e.target.value)} />
-                </form>
-                <p></p>
-              </div>
+              
               <div className='input-area-split'>
                 <form onSubmit={handleSubmit}>    
                   <button type="submit">Submit</button>
