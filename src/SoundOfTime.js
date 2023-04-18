@@ -11,7 +11,7 @@ const SoundOfTime = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    axios.post('/STYCH', {timeA: timeA, timeB: timeB})
+    axios.post('/SOT', {genre: genre, timeA: timeA, timeB: timeB})
           .then(response => {
               console.log(response.data);
               setCurrentData(response.data);

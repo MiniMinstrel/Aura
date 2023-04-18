@@ -153,7 +153,7 @@ async function countAllTuples(req, res) {
     // run query to get employee with employee_id
     result = await connection.execute(
       `SELECT COUNT(*)
-       FROM SONG`);
+       FROM brienboudreau.charts`);
 
     if (result.rows.length == 0) {
       //query return zero employees
@@ -295,6 +295,61 @@ app.post('/RR', function (req, res) {
   const date2 = req.body.timeB;
   //const artist = req.body.artist;
   RR(req, res, region, genre, date1, date2);
+})
+
+async function SOT(req, res, genre, date1, date2) {
+  try {
+    connection = await oracledb.getConnection({
+      user: "jscharff",
+      password: password,
+      connectString: "oracle.cise.ufl.edu/orcl"
+    });
+
+    // run query to get employee with employee_id
+    console.log("Testing query!");
+    result = await connection.execute(
+      `SELECT TO_CHAR(song.release_date, 'YYYY-MM'), count(*)
+       FROM JSCHARFF.song
+        NATURAL JOIN JSCHARFF.made_by
+        INNER JOIN JSCHARFF.artist ON CONTAINS(made_by.artist_id, artist.artist_id) > 0
+       WHERE song.release_date BETWEEN
+        TO_DATE(:date1,'YYYY-MM-DD') AND TO_DATE(:date2,'YYYY-MM-DD') 
+       AND CONTAINS(artist.genres, :genre) > 0
+       GROUP BY TO_CHAR(song.release_date, 'YYYY-MM')
+       ORDER BY TO_CHAR(song.release_date, 'YYYY-MM') ASC`, 
+      {genre: genre, date1: date1, date2: date2});
+    console.log("Completed query!");
+
+    if (result.rows.length == 0) {
+      //query return zero employees
+      return res.send('query send no rows');
+    } else {
+      //send all employees
+      return res.json(result.rows);
+    }
+
+  } catch (err) {
+    //send error message
+    return res.send(err.message);
+  } finally {
+    if (connection) {
+      try {
+        // Always close connections
+        await connection.close(); 
+      } catch (err) {
+        return console.error(err.message);
+      }
+    }
+  }
+}
+
+app.post('/SOT', function (req, res) {
+  console.log(req.body);
+  const genre = req.body.genre;
+  const date1 = req.body.timeA;
+  const date2 = req.body.timeB;
+  //const artist = req.body.artist;
+  SOT(req, res, genre, date1, date2);
 })
 
 app.post("/post", (req, res) => {
