@@ -3,18 +3,25 @@ import * as React from 'react';
 import axios from 'axios';
 
 const PopularElements = () => {
-  const [AuraValue, setAuraValue] = React.useState(false);
-  //This isnt right -- needs fixing
 
-
-  
+  const [AuraValue, setAuraValue] = React.useState('');
   const [timeA, setTimeA] = React.useState('');
   const [timeB, setTimeB] = React.useState('');
+  const [params, setParams] = React.useState([]);
   const [currentData, setCurrentData] = React.useState(["XX"]);
 
   const handleSubmit = (event) => {
+    if (AuraValue == 'delicate') {
+      setParams([0.5, 1.0, 0.0, 0.49]);
+    } else if (AuraValue == 'mellow') {
+      setParams([0.0, 0.49, 0.0, 0.49]);
+    } else if (AuraValue == 'spirited') {
+      setParams([0.0, 0.49, 0.5, 1.0]);
+    } else if (AuraValue == 'wild') {
+      setParams([0.5, 1.0, 0.5, 1.0]);
+    }
     event.preventDefault();
-    axios.post('/STYCH', {AuraValue: AuraValue, timeA: timeA, timeB: timeB})
+    axios.post('/PE', {params: params, timeA: timeA, timeB: timeB})
           .then(response => {
               console.log(response.data);
               setCurrentData(response.data);
@@ -60,25 +67,16 @@ const PopularElements = () => {
               <div className='input-area-split'>
 
                 <div>
-                  <select>
+                  <select value={ AuraValue } onChange={(e) => setAuraValue(e.target.value)}>
                     <option value="default">--Select--</option>
-                    <option value="acousticness">Acousticness</option>
-                    <option value="danceability">Danceability</option>
-                    <option value="duration">Duration</option>
-                    <option value="energy">Energy</option>
-                    <option value="instrumentalness">Instrumentalness</option>
-                    <option value="loudness">Loudness</option>
-                    <option value="liveness">Liveness</option>
-                    <option value="musical_key">Musical Key</option>
-                    <option value="musical_mode">Musical Mode</option>
-                    <option value="speechiness">Speechiness</option>
-                    <option value="tempo">Tempo</option>
-                    <option value="time_signature">Time Signature</option>
-                    <option value="valence">Valence</option>
+                    <option value="delicate">Delicate</option>
+                    <option value="mellow">Mellow</option>
+                    <option value="spirited">Spirited</option>
+                    <option value="wild">Wild</option>
                   </select>
                 </div>
 
-                <p>Select an Aura value!</p>
+                <p>Aura Value</p>
                 
               </div>
 
