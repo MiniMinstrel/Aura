@@ -13,7 +13,7 @@ const RegionsRadio = () => {
 
   const handleSubmit = (event) => {
       event.preventDefault();
-      axios.post('/RR', { chart: chart, region: region, genre: genre, timeA: timeA, timeB: timeB })
+      axios.post('/RR', { region: region, genre: genre, timeA: timeA, timeB: timeB })
             .then(response => {
                 console.log(response.data);
                 setCurrentData(response.data);
