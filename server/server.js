@@ -192,22 +192,18 @@ async function STOT(req, res, song, date1, date2) {
 
     // run query to get employee with employee_id
     result = await connection.execute(
-      `SELECT TO_CHAR(C1, 'YYYY-MM') AS year_mo, avg(streamsum)
-        FROM (
-          SELECT avg(brienboudreau.charts.streams), brienboudreau.charts.chart_date C1
-          FROM SONG RIGHT JOIN brienboudreau.charts ON SONG.SONG_ID=brienboudreau.charts.entry_ID
-          WHERE  brienboudreau.charts.chart_date BETWEEN TO_DATE(:date1,'YYYY-MM-DD') AND TO_DATE(:date2,'YYYY-MM-DD')
-          GROUP BY brienboudreau.charts.chart_date
-        )
-        LEFT JOIN (
-          SELECT avg(brienboudreau.charts.streams) AS streamsum, brienboudreau.charts.chart_date C2
-          FROM SONG RIGHT JOIN brienboudreau.charts ON SONG.SONG_ID=brienboudreau.charts.entry_ID
+      `SELECT TO_CHAR(charts.chart_date, 'YYYY-MM') AS year_mo, avg(charts.streams)
+       FROM brienboudreau.charts
+        INNER JOIN (
+          SELECT song.song_id, song.song_name FROM jscharff.song
           WHERE song.song_name = :song
-          GROUP BY brienboudreau.charts.chart_date
-        )
-      ON TO_CHAR(C1, 'YYYY-MM') = TO_CHAR(C2, 'YYYY-MM')
-      GROUP BY TO_CHAR(C1, 'YYYY-MM')
-      ORDER BY TO_CHAR(C1, 'YYYY-MM') ASC`, {song: song, date1: date1, date2: date2});
+          )
+        ON charts.entry_id = song_id
+       WHERE charts.streams IS NOT NULL AND charts.chart_date BETWEEN
+        TO_DATE(:date1,'YYYY-MM-DD') AND TO_DATE(:date2,'YYYY-MM-DD')
+       GROUP BY TO_CHAR(charts.chart_date, 'YYYY-MM')
+       ORDER BY TO_CHAR(charts.chart_date, 'YYYY-MM')
+`, {song: song, date1: date1, date2: date2});
 
     if (result.rows.length == 0) {
       //query return zero employees
