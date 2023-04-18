@@ -307,7 +307,18 @@ async function SOT(req, res, genre, date1, date2) {
 
     // run query to get employee with employee_id
     console.log("Testing query!");
-    result = await connection.execute(
+    if (genre == 'All') {
+      result = await connection.execute(
+      `SELECT TO_CHAR(song.release_date, 'YYYY-MM'), count(*)
+       FROM JSCHARFF.song
+       WHERE song.release_date 
+        BETWEEN
+        TO_DATE(:date1,'YYYY-MM-DD') AND TO_DATE(:date2,'YYYY-MM-DD')
+       GROUP BY TO_CHAR(song.release_date, 'YYYY-MM')
+       ORDER BY TO_CHAR(song.release_date, 'YYYY-MM') ASC`, 
+      {date1: date1, date2: date2});
+    } else {
+      result = await connection.execute(
       `SELECT TO_CHAR(song.release_date, 'YYYY-MM'), count(*)
        FROM JSCHARFF.song
         NATURAL JOIN JSCHARFF.made_by
@@ -318,6 +329,7 @@ async function SOT(req, res, genre, date1, date2) {
        GROUP BY TO_CHAR(song.release_date, 'YYYY-MM')
        ORDER BY TO_CHAR(song.release_date, 'YYYY-MM') ASC`, 
       {genre: genre, date1: date1, date2: date2});
+    }
     console.log("Completed query!");
 
     if (result.rows.length == 0) {
