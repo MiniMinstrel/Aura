@@ -4,7 +4,7 @@ import axios from 'axios';
 
 const SoundOfTime = () => {
 
-  const [genre, setGenre] = React.useState('Genre');
+  const [genre, setGenre] = React.useState('All');
   const [timeA, setTimeA] = React.useState('');
   const [timeB, setTimeB] = React.useState('');
   const [currentData, setCurrentData] = React.useState(["XX"]);
@@ -59,7 +59,7 @@ const SoundOfTime = () => {
                 <form>
                   <input type="text" value={ genre } onChange={(e) => setGenre(e.target.value)} />
                 </form>
-                <p></p>
+                <p>Genre</p>
               </div>
 
 
