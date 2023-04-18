@@ -241,7 +241,7 @@ app.post('/STOT', function (req, res) {
   STOT(req, res, song, date1, date2);
 })
 
-async function RR(req, res, chart, region, genre, date1, date2) {
+async function RR(req, res, region, genre, date1, date2) {
   try {
     connection = await oracledb.getConnection({
       user: "jscharff",
@@ -252,20 +252,16 @@ async function RR(req, res, chart, region, genre, date1, date2) {
     // run query to get employee with employee_id
     console.log("Testing query!");
     result = await connection.execute(
-      `SELECT TO_CHAR(chartdate, 'YYYY-MM'), genres
-       FROM
-          (SELECT * FROM jscharff.chart WHERE
-            chart.name = :chart
-            AND chart.region = :region
-            AND chart.chartdate BETWEEN
-            TO_DATE(:date1,'YYYY-MM-DD')
-            AND TO_DATE(:date2,'YYYY-MM-DD')),
-          jscharff.contains,
-          jscharff.made_by,
-            (SELECT artist.artist_id, artist.genres FROM jscharff.artist
-             WHERE CONTAINS(ARTIST.GENRES, :genre) > 0)
-      ORDER BY TO_CHAR(chartdate, 'YYYY-MM') DESC`, 
-      {chart: chart, region: region, genre: genre, date1: date1, date2: date2});
+      `SELECT TO_CHAR(charts.chart_date, 'YYYY-MM') AS year_mo, count(charts.chart)
+       FROM brienboudreau.charts
+        INNER JOIN jscharff.made_by ON entry_id = made_by.song_id
+        INNER JOIN jscharff.artist ON CONTAINS(made_by.artist_id, artist.artist_id) > 0
+       WHERE CONTAINS(artist.genres, :genre) > 0 AND region = :region 
+       AND chart_date BETWEEN
+        TO_DATE(:date1,'YYYY-MM-DD') AND TO_DATE(:date2,'YYYY-MM-DD')
+       GROUP BY TO_CHAR(charts.chart_date, 'YYYY-MM')
+       ORDER BY year_mo ASC`, 
+      {region: region, genre: genre, date1: date1, date2: date2});
     console.log("Completed query!");
 
     if (result.rows.length == 0) {
@@ -293,13 +289,12 @@ async function RR(req, res, chart, region, genre, date1, date2) {
 
 app.post('/RR', function (req, res) {
   console.log(req.body);
-  const chart = req.body.chart;
   const region = req.body.region;
   const genre = req.body.genre;
   const date1 = req.body.timeA;
   const date2 = req.body.timeB;
   //const artist = req.body.artist;
-  RR(req, res, chart, region, genre, date1, date2);
+  RR(req, res, region, genre, date1, date2);
 })
 
 app.post("/post", (req, res) => {

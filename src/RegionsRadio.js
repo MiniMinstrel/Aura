@@ -59,27 +59,12 @@ const RegionsRadio = () => {
                 </form>
                 <p></p>
               </div>
-          <div className='input-area-split'>
-                <form>
-                  <select value={ chart } onChange={(e) => setChart(e.target.value)}>
-                    <option value="top200">Top 200</option>
-                    <option value="viral50">Viral 50</option>
-                  </select>
-                </form>
-                <p>Chart Type</p>
-              </div>
               <div className='input-area-split'>
                 <form>
-                  <select value={ region } onChange={(e) => setRegion(e.target.value)}>
-                    <option value="top200">Top 200</option>
-                    <option value="top200">Top 200</option>
-                    <option value="viral50">Viral 50</option>
-                  </select>
+                  <input type="text" value={ region } onChange={(e) => setRegion(e.target.value)} />
                 </form>
-                <p>Region</p>
-              </div>
-              
-              
+                <p></p>
+              </div>              
               <div className='input-area-split'>
                 <form>
                   <input type="date" value={ timeA } onChange={(e) => setTimeA(e.target.value)} />
