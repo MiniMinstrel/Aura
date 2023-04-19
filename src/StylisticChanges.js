@@ -7,11 +7,8 @@ import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Responsi
 const StylisticChanges = () => {
 
 
-  const [AuraValue, setAuraValue] = React.useState(false);
-  //This isnt right -- needs fixing
-
-
-  
+  const [AuraValue, setAuraValue] = React.useState('');
+  const [artist, setArtist] = React.useState('Artist');  
   const [timeA, setTimeA] = React.useState('');
   const [timeB, setTimeB] = React.useState('');
   const [currentData, setCurrentData] = React.useState([["No Data"]]);
@@ -27,7 +24,7 @@ const StylisticChanges = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    axios.post('/STYCH', {AuraValue: AuraValue, timeA: timeA, timeB: timeB})
+    axios.post('/STYCH', {AuraValue: AuraValue, artist: artist, timeA: timeA, timeB: timeB})
           .then(response => {
               console.log(response.data);
               setCurrentData(response.data);
@@ -84,9 +81,9 @@ const StylisticChanges = () => {
               <div className='input-area-split'>
 
                 <div>
-                  <select>
+                  <select value={ AuraValue } onChange={(e) => setAuraValue(e.target.value)}>
                     <option value="default">--Select--</option>
-                    <option value="acousticness">Acousticness</option>
+                    <option value="accousticness">Accousticness</option>
                     <option value="danceability">Danceability</option>
                     <option value="duration">Duration</option>
                     <option value="energy">Energy</option>
@@ -102,8 +99,15 @@ const StylisticChanges = () => {
                   </select>
                 </div>
 
-                <p>Select an Aura value!</p>
+                <p>Sound Measure</p>
                 
+              </div>
+
+              <div className='input-area-split'>
+                <form>
+                  <input type="text" value={ artist } onChange={(e) => setArtist(e.target.value)} />
+                </form>
+                <p></p>
               </div>
 
               <div className='input-area-split'>

@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import AuraImage from './Aura.png'
 import axios from 'axios';
 
@@ -13,13 +13,23 @@ const Home = () => {
   //   window.scrollTo(0, 0);
   // }, [navigate]); // Scroll to the top of the page only when navigating to a new page
 
+  const [total, setTotal] = useState('');
+  const [rawValues, setRawValues] = useState('');
+
   const tupleReturn = (event) => {
         event.preventDefault();
-        axios.post('/alltuples')
-            .then(response => {
-                alert("The database contains " + response.data + " tuples!");
-            })
+        Promise.all([
+          axios.post('/alltuples1'),
+          axios.post('/alltuples2'),
+          axios.post('/alltuples3')
+          ])
+            .then(axios.spread((data1, data2, data3) => {
+              // output of req.
+              setRawValues([Number(data1.data[0]), Number(data2.data[0]), Number(data3.data[0])]);
+            }))
             .catch(error => console.error(error));
+        setTotal(rawValues[0] + rawValues[1] + rawValues[2]);
+        alert("This database has a total of " + total + " tuples!");
     }
 
 

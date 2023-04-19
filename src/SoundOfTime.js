@@ -4,14 +4,14 @@ import axios from 'axios';
 
 const SoundOfTime = () => {
 
-  const [genre, setGenre] = React.useState('Genre');
+  const [genre, setGenre] = React.useState('All');
   const [timeA, setTimeA] = React.useState('');
   const [timeB, setTimeB] = React.useState('');
   const [currentData, setCurrentData] = React.useState(["XX"]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    axios.post('/STYCH', {timeA: timeA, timeB: timeB})
+    axios.post('/SOT', {genre: genre, timeA: timeA, timeB: timeB})
           .then(response => {
               console.log(response.data);
               setCurrentData(response.data);
@@ -59,7 +59,7 @@ const SoundOfTime = () => {
                 <form>
                   <input type="text" value={ genre } onChange={(e) => setGenre(e.target.value)} />
                 </form>
-                <p></p>
+                <p>Genre</p>
               </div>
 
 
