@@ -1,20 +1,32 @@
 import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react'; 
 import axios from 'axios';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+
 
 const StreamsOverTime = () => {
 
     const [song, setSong] = useState('Song Title');
     const [timeA, setTimeA] = useState('');
     const [timeB, setTimeB] = useState('');
-    const [currentData, setCurrentData] = useState(["XX"]);
+    const [currentData, setCurrentData] = useState([["No Data Yet"]]);
+    const [filteredArray, setFilteredArray] = useState([]);
+
+    useEffect(() => {
+      const newFilteredArray = currentData.filter(childArray => {
+        return !childArray.some(element => element === null);
+      });
+      setFilteredArray(newFilteredArray);
+    }, [currentData]);
+
   
     const handleSubmit = (event) => {
       event.preventDefault();
       axios.post('/STOT', { song: song, timeA: timeA, timeB: timeB})
             .then(response => {
-                console.log(response.data);
                 setCurrentData(response.data);
+                console.log(response.data);
+                console.log(filteredArray);
             })
             .catch(error => console.error(error));
     }
@@ -50,8 +62,25 @@ const StreamsOverTime = () => {
 
           
           <div className='query-page-left'>
-            <h1>Graph</h1>
-            
+            <ResponsiveContainer width="90%" height="90%">
+              <LineChart
+                data={filteredArray}
+                margin={{
+                  top: 30,
+                  right: 0,
+                  left: 60,
+                  bottom: 5,
+                }}
+              >
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis dataKey="0" label={{ value: 'Month', position: 'insideBottomRight', offset: 0 }} />
+                <YAxis label={{ value: 'Avg. Streams', angle: -90, position: 'insideLeft' }} />
+                <Tooltip label={"Avg. Streams"}/>
+                <Legend />
+                <Line connectNulls type="monotone" dataKey="1" name="Streams" stroke="#8884d8" activeDot={{ r: 8 }} />
+              </LineChart>
+          </ResponsiveContainer>
+
           </div>
           <div className='query-page-right'>
             <h1>Input</h1>
