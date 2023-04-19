@@ -1,13 +1,24 @@
 import { Link } from 'react-router-dom';
 import * as React from 'react'; 
 import axios from 'axios';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+
 
 const SoundOfTime = () => {
 
   const [genre, setGenre] = React.useState('All');
   const [timeA, setTimeA] = React.useState('');
   const [timeB, setTimeB] = React.useState('');
-  const [currentData, setCurrentData] = React.useState(["XX"]);
+  const [currentData, setCurrentData] = React.useState([["No Data"]]);
+  const [filteredArray, setFilteredArray] = React.useState([]);
+
+    React.useEffect(() => {
+      const newFilteredArray = currentData.filter(childArray => {
+        return !childArray.some(element => element === null);
+      });
+      setFilteredArray(newFilteredArray);
+    }, [currentData]);
+
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -49,7 +60,24 @@ const SoundOfTime = () => {
 
         
         <div className='query-page-left'>
-          <h1>Graph</h1>
+          <ResponsiveContainer width="90%" height="90%">
+                <LineChart
+                  data={filteredArray}
+                  margin={{
+                    top: 30,
+                    right: 0,
+                    left: 60,
+                    bottom: 5,
+                  }}
+                >
+                  <CartesianGrid strokeDasharray="3 3" />
+                  <XAxis dataKey="0" label={{ value: 'Month', position: 'insideBottomRight', offset: 0 }} />
+                  <YAxis label={{ value: genre + "Songs Released", angle: -90, position: 'insideLeft' }} />
+                  <Tooltip label={genre + "Songs Released"}/>
+                  <Legend />
+                  <Line connectNulls type="monotone" dataKey="1" name={genre} stroke="#8884d8" activeDot={{ r: 8 }} />
+                </LineChart>
+            </ResponsiveContainer>
           
         </div>
         <div className='query-page-right'>

@@ -66,10 +66,10 @@ const StylisticChanges = () => {
                 >
                   <CartesianGrid strokeDasharray="3 3" />
                   <XAxis dataKey="0" label={{ value: 'Month', position: 'insideBottomRight', offset: 0 }} />
-                  <YAxis label={{ value: 'Avg. Streams', angle: -90, position: 'insideLeft' }} />
-                  <Tooltip label={"Avg. Streams"}/>
+                  <YAxis label={{ value: AuraValue, angle: -90, position: 'insideLeft' }} />
+                  <Tooltip label={AuraValue}/>
                   <Legend />
-                  <Line connectNulls type="monotone" dataKey="1" name="Streams" stroke="#8884d8" activeDot={{ r: 8 }} />
+                  <Line connectNulls type="monotone" dataKey="1" name={artist} stroke="#8884d8" activeDot={{ r: 8 }} />
                 </LineChart>
             </ResponsiveContainer>
           
