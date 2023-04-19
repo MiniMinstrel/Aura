@@ -143,7 +143,8 @@ app.post('/testQuery', function (req, res) {
   selectArtistByGenre(req, res, param);
 })
 
-async function countAllTuples(req, res) {
+async function countAllTuples(req, res, nmbr) {
+  let connection;
   try {
     connection = await oracledb.getConnection({
       user: "jscharff",
@@ -151,9 +152,19 @@ async function countAllTuples(req, res) {
       connectString: "oracle.cise.ufl.edu/orcl"
     });
     // run query to get employee with employee_id
-    result = await connection.execute(
+    if (nmbr == 1) {
+      result = await connection.execute(
       `SELECT COUNT(*)
        FROM brienboudreau.charts`);
+    } else if (nmbr == 2) {
+      result = await connection.execute(
+      `SELECT COUNT(*)
+       FROM ARTIST`);
+    } else if (nmbr == 3) {
+      result = await connection.execute(
+      `SELECT COUNT(*)
+       FROM SONG`);
+    }
 
     if (result.rows.length == 0) {
       //query return zero employees
@@ -178,8 +189,16 @@ async function countAllTuples(req, res) {
   }
 }
 
-app.post('/allTuples', function (req, res) {
-  countAllTuples(req, res);
+app.post('/allTuples1', function (req, res) {
+  countAllTuples(req, res, 1);
+})
+
+app.post('/allTuples2', function (req, res) {
+  countAllTuples(req, res, 2);
+})
+
+app.post('/allTuples3', function (req, res) {
+  countAllTuples(req, res, 3);
 })
 
 async function STOT(req, res, song, date1, date2) {
@@ -191,6 +210,7 @@ async function STOT(req, res, song, date1, date2) {
     });
 
     // run query to get employee with employee_id
+    console.log("Testing query!");
     result = await connection.execute(
       `SELECT TO_CHAR(charts.chart_date, 'YYYY-MM') AS year_mo, avg(charts.streams)
        FROM brienboudreau.charts
@@ -202,8 +222,9 @@ async function STOT(req, res, song, date1, date2) {
        WHERE charts.streams IS NOT NULL AND charts.chart_date BETWEEN
         TO_DATE(:date1,'YYYY-MM-DD') AND TO_DATE(:date2,'YYYY-MM-DD')
        GROUP BY TO_CHAR(charts.chart_date, 'YYYY-MM')
-       ORDER BY TO_CHAR(charts.chart_date, 'YYYY-MM')
-`, {song: song, date1: date1, date2: date2});
+       ORDER BY TO_CHAR(charts.chart_date, 'YYYY-MM')`, 
+       {song: song, date1: date1, date2: date2});
+    console.log("Completed query!");
 
     if (result.rows.length == 0) {
       //query return zero employees
