@@ -92,8 +92,8 @@ const Queries = () => {
           </Link>
 
           <p className='query-descriptions-right'>
-            Here at Aura, we have 15 descriptors for the sounds of music.  Come 
-            see which of these are the most popular!
+            Here at Aura, we have 4 descriptors for the sounds of music.  Come 
+            see how the popularities of these categories changes over time!
           </p>
         </div>
 
