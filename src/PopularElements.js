@@ -9,7 +9,8 @@ const PopularElements = () => {
   const [AuraValue, setAuraValue] = React.useState('');
   const [timeA, setTimeA] = React.useState('');
   const [timeB, setTimeB] = React.useState('');
-  const [params, setParams] = React.useState([]);
+  const [params, setParams] = React.useState('');
+  const [formSubmitted, setFormSubmitted] = React.useState(false);
   const [currentData, setCurrentData] = React.useState([["No Data"]]);
   const [filteredArray, setFilteredArray] = React.useState([]);
 
@@ -20,24 +21,35 @@ const PopularElements = () => {
       setFilteredArray(newFilteredArray);
     }, [currentData]);
 
-
-  const handleSubmit = (event) => {
-    if (AuraValue == 'delicate') {
-      setParams([0.5, 1.0, 0.0, 0.49]);
-    } else if (AuraValue == 'mellow') {
-      setParams([0.0, 0.49, 0.0, 0.49]);
-    } else if (AuraValue == 'spirited') {
-      setParams([0.0, 0.49, 0.5, 1.0]);
-    } else if (AuraValue == 'wild') {
-      setParams([0.5, 1.0, 0.5, 1.0]);
-    }
-    event.preventDefault();
-    axios.post('/PE', {params: params, timeA: timeA, timeB: timeB})
+    React.useEffect(() => {
+      console.log(formSubmitted);
+      if (formSubmitted) {
+        axios.post('/PE', {params: params, timeA: timeA, timeB: timeB})
           .then(response => {
               console.log(response.data);
               setCurrentData(response.data);
+              setFormSubmitted(false);
+
           })
-          .catch(error => console.error(error));
+          .catch(error => console.error(error));      }
+    }, [formSubmitted]);
+
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    if (AuraValue == 'delicate') {
+      setParams([0.5, 1.0, 0.0, 0.49]);
+      setFormSubmitted(true);
+    } else if (AuraValue == 'mellow') {
+      setParams([0.0, 0.49, 0.0, 0.49]);
+      setFormSubmitted(true);
+    } else if (AuraValue == 'spirited') {
+      setParams([0.0, 0.49, 0.5, 1.0]);
+      setFormSubmitted(true);
+    } else if (AuraValue == 'wild') {
+      setParams([0.5, 1.0, 0.5, 1.0]);
+      setFormSubmitted(true);
+    } 
   }
 
 
