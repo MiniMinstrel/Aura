@@ -86,10 +86,6 @@ const Home = () => {
         </div>
         <ul>
           <li>
-            <Link to="/Login">Login Page</Link>
-            <br />
-            <Link to="/Avgstreams">Avg Streams Query</Link>
-            <br/>
             <Link to="/TestQuery">Test a Query!</Link>
           </li>
         </ul>
