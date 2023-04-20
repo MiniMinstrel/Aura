@@ -92,10 +92,10 @@ const PopularElements = () => {
                 >
                   <CartesianGrid strokeDasharray="3 3" />
                   <XAxis dataKey="0" label={{ value: 'Month', position: 'insideBottomRight', offset: 0 }} />
-                  <YAxis label={{ value: "Songs Released", angle: -90, position: 'insideLeft' }} />
+                  <YAxis label={{ value: "Avg. Popularity", angle: -90, position: 'insideLeft' }} />
                   <Tooltip label={"Songs Released"}/>
                   <Legend />
-                  <Line connectNulls type="monotone" dataKey="1" name={"genre"} stroke="#8884d8" activeDot={{ r: 8 }} />
+                  <Line connectNulls type="monotone" dataKey="1" name={AuraValue} stroke="#8884d8" activeDot={{ r: 8 }} />
                 </LineChart>
             </ResponsiveContainer>
           

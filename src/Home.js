@@ -80,15 +80,6 @@ const Home = () => {
             </p>
           </div>
         </div>
-        <br></br>
-        <div className='divider'>
-          <br></br>
-        </div>
-        <ul>
-          <li>
-            <Link to="/TestQuery">Test a Query!</Link>
-          </li>
-        </ul>
       </div>
     );
 }

@@ -37,7 +37,7 @@ async function selectFiveArtists(req, res) {
     }
     if (result.rows.length == 0) {
       //query return zero employees
-      return res.send('query send no rows');
+      return res.send([["No results returned for given paramaters"]]);
     } else {
       //send all employees
       return res.send(result.rows);
@@ -78,7 +78,7 @@ async function selectArtistByID(req, res, id) {
     }
     if (result.rows.length == 0) {
       //query return zero employees
-      return res.send('query send no rows');
+      return res.send([["No results returned for given paramaters"]]);
     } else {
       //send all employees
       return res.json(result.rows);
@@ -114,7 +114,7 @@ async function selectArtistByGenre(req, res, param) {
 
     if (result.rows.length == 0) {
       //query return zero employees
-      return res.send('query send no rows');
+      return res.send([["No results returned for given paramaters"]]);
     } else {
       //send all employees
       return res.json(result.rows);
@@ -168,7 +168,7 @@ async function countAllTuples(req, res, nmbr) {
 
     if (result.rows.length == 0) {
       //query return zero employees
-      return res.send('query send no rows');
+      return res.send([["No results returned for given paramaters"]]);
     } else {
       //send all employees
       return res.json(result.rows);
@@ -228,7 +228,7 @@ async function STOT(req, res, song, date1, date2) {
 
     if (result.rows.length == 0) {
       //query return zero employees
-      return res.send('query send no rows');
+      return res.send([["No results returned for given paramaters"]]);
     } else {
       //send all employees
       return res.json(result.rows);
@@ -283,7 +283,7 @@ async function RR(req, res, region, genre, date1, date2) {
 
     if (result.rows.length == 0) {
       //query return zero employees
-      return res.send('query send no rows');
+      return res.send([["No results returned for given paramaters"]]);
     } else {
       //send all employees
       return res.json(result.rows);
@@ -351,7 +351,7 @@ async function SOT(req, res, genre, date1, date2) {
 
     if (result.rows.length == 0) {
       //query return zero employees
-      return res.send('query send no rows');
+      return res.send([["No results returned for given paramaters"]]);
     } else {
       //send all employees
       return res.json(result.rows);
@@ -405,7 +405,7 @@ async function STYCH(req, res, AuraValue, artist, date1, date2) {
 
     if (result.rows.length == 0) {
       //query return zero employees
-      return res.send('query send no rows');
+      return res.send([["No results returned for given paramaters"]]);
     } else {
       //send all employees
       return res.json(result.rows);
@@ -462,7 +462,7 @@ async function PE(req, res, params, date1, date2) {
 
     if (result.rows.length == 0) {
       //query return zero employees
-      return res.send('query send no rows');
+      return res.send([["No results returned for given paramaters"]]);
     } else {
       //send all employees
       return res.json(result.rows);
