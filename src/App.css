@@ -183,7 +183,7 @@
 .query-page{
   display: flex;
   flex-direction: row;
-  max-height: 80vh;
+  max-height: 90vh;
 }
 
 .query-page h1{
@@ -306,4 +306,11 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.timeRestraint{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(15px + 0.5vmin);
 }
