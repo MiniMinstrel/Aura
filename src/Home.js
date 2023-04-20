@@ -15,6 +15,16 @@ const Home = () => {
 
   const [total, setTotal] = useState('');
   const [rawValues, setRawValues] = useState('');
+  const [totalChange, setTotalChange] = useState(false);
+
+  useEffect(() => {
+    if (totalChange) {
+      console.log(rawValues);
+      setTotal(rawValues[0]);
+      alert("This database has a total of " + total + " tuples!");
+      setTotalChange(false);
+    }
+  }, [total]);
 
   const tupleReturn = (event) => {
         event.preventDefault();
@@ -25,11 +35,11 @@ const Home = () => {
           ])
             .then(axios.spread((data1, data2, data3) => {
               // output of req.
-              setRawValues([Number(data1.data[0]), Number(data2.data[0]), Number(data3.data[0])]);
+              console.log([Number(data1.data[0]), Number(data2.data[0]), Number(data3.data[0])]);
+              setTotal(Number(data1.data[0]) + Number(data2.data[0]) + Number(data3.data[0]));
+              setTotalChange(true);
             }))
             .catch(error => console.error(error));
-        setTotal(rawValues[0] + rawValues[1] + rawValues[2]);
-        alert("This database has a total of " + total + " tuples!");
     }
 
 
@@ -67,8 +77,8 @@ const Home = () => {
         <div className='divider'>
         </div>
         <br></br>
-        <div className='tuples' onClick={ tupleReturn }>
-          <div className='tuples-left'>
+        <div className='tuples'>
+          <div className='tuples-left' onClick={ tupleReturn }>
             <button>Tuple Button!</button>
           </div>
           <div className='tuples-right'>
@@ -80,15 +90,6 @@ const Home = () => {
             </p>
           </div>
         </div>
-        <br></br>
-        <div className='divider'>
-          <br></br>
-        </div>
-        <ul>
-          <li>
-            <Link to="/TestQuery">Test a Query!</Link>
-          </li>
-        </ul>
       </div>
     );
 }

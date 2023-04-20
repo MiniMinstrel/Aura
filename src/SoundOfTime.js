@@ -108,6 +108,9 @@ const SoundOfTime = () => {
                   End Date
                 </p>
               </div>
+              <p className='timeRestraint'>
+                Please keep the dates between January 1st, 1900, and April 16, 2021 !
+              </p>
               
               <div className='input-area-split'>
                 <form onSubmit={handleSubmit}>    

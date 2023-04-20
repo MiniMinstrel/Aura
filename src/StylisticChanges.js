@@ -7,7 +7,7 @@ import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Responsi
 const StylisticChanges = () => {
 
 
-  const [AuraValue, setAuraValue] = React.useState('');
+  const [AuraValue, setAuraValue] = React.useState('accousticness');
   const [artist, setArtist] = React.useState('Artist');  
   const [timeA, setTimeA] = React.useState('');
   const [timeB, setTimeB] = React.useState('');
@@ -40,7 +40,9 @@ const StylisticChanges = () => {
           Stylistic Changes
         </h1>
         <p1>
-          [paragraph about query]
+          &emsp; Creativity doesn't flow in a straight line.  Artists sometimes spend years changing their styles to try and perfect their craft.
+          With Aura's Stylistic Changes function, you can see how an individual artist has changed elements of their music over time, giving you quantified
+          insight into their relationship with music.
         </p1>
       </div>
       <br></br>
@@ -82,7 +84,6 @@ const StylisticChanges = () => {
 
                 <div>
                   <select value={ AuraValue } onChange={(e) => setAuraValue(e.target.value)}>
-                    <option value="default">--Select--</option>
                     <option value="accousticness">Accousticness</option>
                     <option value="danceability">Danceability</option>
                     <option value="duration">Duration</option>
@@ -128,6 +129,10 @@ const StylisticChanges = () => {
                 </p>
               </div>
               
+              <p className='timeRestraint'>
+                Please keep the dates between January 1st, 1900, and April 16, 2021 !
+              </p>
+
               <div className='input-area-split'>
                 <form onSubmit={handleSubmit}>    
                   <button type="submit">Submit</button>
