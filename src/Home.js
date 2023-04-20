@@ -1,7 +1,8 @@
 import { Link } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import AuraImage from './Aura.png'
+import axios from 'axios';
 
 const Home = () => {
 
@@ -11,6 +12,25 @@ const Home = () => {
   //   // Scroll to the top of the page whenever the component is mounted or updated
   //   window.scrollTo(0, 0);
   // }, [navigate]); // Scroll to the top of the page only when navigating to a new page
+
+  const [total, setTotal] = useState('');
+  const [rawValues, setRawValues] = useState('');
+
+  const tupleReturn = (event) => {
+        event.preventDefault();
+        Promise.all([
+          axios.post('/alltuples1'),
+          axios.post('/alltuples2'),
+          axios.post('/alltuples3')
+          ])
+            .then(axios.spread((data1, data2, data3) => {
+              // output of req.
+              setRawValues([Number(data1.data[0]), Number(data2.data[0]), Number(data3.data[0])]);
+            }))
+            .catch(error => console.error(error));
+        setTotal(rawValues[0] + rawValues[1] + rawValues[2]);
+        alert("This database has a total of " + total + " tuples!");
+    }
 
 
     return (
@@ -47,7 +67,7 @@ const Home = () => {
         <div className='divider'>
         </div>
         <br></br>
-        <div className='tuples'>
+        <div className='tuples' onClick={ tupleReturn }>
           <div className='tuples-left'>
             <button>Tuple Button!</button>
           </div>
@@ -66,10 +86,6 @@ const Home = () => {
         </div>
         <ul>
           <li>
-            <Link to="/Login">Login Page</Link>
-            <br />
-            <Link to="/Avgstreams">Avg Streams Query</Link>
-            <br/>
             <Link to="/TestQuery">Test a Query!</Link>
           </li>
         </ul>

@@ -169,22 +169,30 @@
 
 .query-page-about{
   margin-left: 10vw;
+  margin-right: 40vw;
 }
 .query-page-about h1{
-  font-size: calc(20px + 3vmin);
+  font-size: calc(20px + 4vmin);
   margin-top: 8vh;
 }
-.query-page-about p{
-  margin-left: 3.5vw;
-  margin-right: 10vw;
+.query-page-about p1{
   font-family: 'Roboto Slab', serif;
-  font-size: calc(10px + 3vmin);
+  font-size: calc(10px + 1.5vmin);
 }
 
 .query-page{
   display: flex;
   flex-direction: row;
-  height: 100%;
+  max-height: 80vh;
+}
+
+.query-page h1{
+  font-size: calc(30px + 2vmin);
+  margin-left: 2vw;
+}
+.query-page p{
+  font-size: 30px + 0.75vmin;
+  margin-right: 5vw;
 }
 .query-page-left{
   flex: 1;
@@ -195,6 +203,60 @@
   flex:1;
   background-color: antiquewhite;
 }
+
+.input-area{
+  display: flex;
+  flex-direction: column;
+}
+
+.input-area-split{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  margin-bottom: 2vh;
+  margin-top: 2vh;
+}
+
+.input-area-split input{
+  display: block;
+  padding: .5rem .8rem .5rem .8rem;
+  margin: .9vw 0 ;
+  border: 5;
+  border-radius: 5px;
+  font-size: 20px;
+  margin-left: 2vw;
+  margin-right: 1vw;
+}
+
+.input-area-split p{
+  font-size: calc(10px + 1.25vmin);
+  margin-left: 3vmin;
+}
+
+.input-area-split button{
+  background-color: rgb(153, 218, 167);
+  color: black;
+  font-size: calc(10px + 2vmin);
+  width: calc(24vw);
+  height: calc(16vh);
+  border-radius: calc(4px + 2vmin);
+  border: calc(2px + 0.5vmin) solid black
+}
+.input-area-split button:hover{
+  cursor: pointer;
+  background-color: rgb(109, 150, 118);
+}
+.input-area-split select{
+  padding: .5rem .8rem .5rem .8rem;
+  margin: .9vw 0 ;
+  border-block-start-width: 5px;
+  border-radius: 5px;
+  font-size: 20px;
+  margin-left: 2vw;
+  margin-right: 1vw;
+}
+
 
 .divider{
   margin-top: 2vmin;
