@@ -7,7 +7,7 @@ import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Responsi
 const StylisticChanges = () => {
 
 
-  const [AuraValue, setAuraValue] = React.useState('');
+  const [AuraValue, setAuraValue] = React.useState('accousticness');
   const [artist, setArtist] = React.useState('Artist');  
   const [timeA, setTimeA] = React.useState('');
   const [timeB, setTimeB] = React.useState('');
@@ -84,7 +84,6 @@ const StylisticChanges = () => {
 
                 <div>
                   <select value={ AuraValue } onChange={(e) => setAuraValue(e.target.value)}>
-                    <option value="default">--Select--</option>
                     <option value="accousticness">Accousticness</option>
                     <option value="danceability">Danceability</option>
                     <option value="duration">Duration</option>
