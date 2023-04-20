@@ -183,7 +183,7 @@
 .query-page{
   display: flex;
   flex-direction: row;
-  max-height: 90vh;
+  max-height: 100vh;
 }
 
 .query-page h1{
